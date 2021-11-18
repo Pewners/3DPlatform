@@ -20,7 +20,7 @@ public class CharacterController : MonoBehaviour
     bool isOnGround;
     public GameObject groundChecker;
     public LayerMask groundLayer;
-    public float jumpForce = 300.0f;
+    public float jumpForce = 500.0f;
     
     void Start()
     {
