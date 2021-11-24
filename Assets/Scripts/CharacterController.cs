@@ -21,9 +21,13 @@ public class CharacterController : MonoBehaviour
     public GameObject groundChecker;
     public LayerMask groundLayer;
     public float jumpForce = 500.0f;
+
+    Animator myAnim;
     
     void Start()
     {
+        myAnim = GetComponentInChildren<Animator>();
+
         Cursor.lockState = CursorLockMode.Locked;
 		
 		sprintTimer = maxSprint;
@@ -36,9 +40,11 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+        myAnim.SetBool("isOnGround", isOnGround);
 
         if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
         {
+            myAnim.SetTrigger("jumped");
             myRigidBody.AddForce(transform.up * jumpForce);
         }
 
@@ -59,6 +65,8 @@ public class CharacterController : MonoBehaviour
 
         Vector3 newVelocity = (transform.forward * Input.GetAxis("Vertical") * maxSpeed + (transform.right * Input.GetAxis ("Horizontal") * maxSpeed));
         myRigidBody.velocity = new Vector3(newVelocity.x, myRigidBody.velocity.y, newVelocity.z);
+
+        myAnim.SetFloat("speed", newVelocity.magnitude);
 
         rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
