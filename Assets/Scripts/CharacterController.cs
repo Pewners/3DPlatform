@@ -23,8 +23,6 @@ public class CharacterController : MonoBehaviour
     public float jumpForce = 500.0f;
 
     Animator myAnim;
-
-	AudioSource myAudioSource;
     
     void Start()
     {
@@ -33,8 +31,6 @@ public class CharacterController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 		
 		sprintTimer = maxSprint;
-
-		myAudioSource = GetComponent<AudioSource>();
 		
 		cam = GameObject.Find("Main Camera");
         myRigidBody = GetComponent<Rigidbody>();
@@ -77,12 +73,5 @@ public class CharacterController : MonoBehaviour
 
         camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
         cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
-
-		if ((myRigidBody.velocity.magnitude > 1.0f) && (myAudioSource.isPlaying == false))
-		{
-			myAudioSource.volume = Random.Range(0.8f, 1.0f);
-			myAudioSource.pitch = Random.Range(0.8f, 1.1f);
-			myAudioSource.Play();
-		}
     }
 }
