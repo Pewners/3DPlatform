@@ -1,2 +1,2 @@
 # 3D Platformer Project (Second Project)
-Repository for the game "Classroom Catastrophe"
+This was the second project I did in College and my first ever 3D game made in Unity.
