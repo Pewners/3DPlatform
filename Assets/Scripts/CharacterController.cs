@@ -17,7 +17,7 @@ public class CharacterController : MonoBehaviour
     GameObject cam;
     Rigidbody myRigidBody;
 
-    bool isOnGround;
+    public bool isOnGround;
     public GameObject groundChecker;
     public LayerMask groundLayer;
     public float jumpForce = 500.0f;
