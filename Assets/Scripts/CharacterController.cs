@@ -70,7 +70,7 @@ public class CharacterController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
 
         camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
-        cam.transform.localRotation = Quaternion.Euler(new Vector3(Mathf.Clamp(-camRotation, -45f, 30f), -90f, 0.0f));
+        cam.transform.localRotation = Quaternion.Euler(new Vector3(Mathf.Clamp(-camRotation, -16f, 13f), -90f, 0.0f));
 
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
