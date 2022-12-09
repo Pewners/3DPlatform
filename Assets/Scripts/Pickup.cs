@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pickup : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    ScoreManager sm;
+
+    void Start()
     {
-        //insert code that adds to counter
-        Destroy(gameObject);
+        sm = FindObjectOfType<ScoreManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        sm.score++;
+        Destroy(gameObject);
     }
 }
