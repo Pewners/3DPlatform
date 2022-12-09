@@ -5,18 +5,22 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public int score;
+    public GameObject finish;
+    public GameObject finishText;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        finish.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (score > 4)
+        if (score > 0)
         {
-            //create goal
+            finish.SetActive(true);
+            finishText.SetActive(true);
         }
     }
 }
