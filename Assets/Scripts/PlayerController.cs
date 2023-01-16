@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
 	public float maxSprint = 5.0f;
 	float sprintTimer;
 
-    //float rotation = 0.0f;
-    //float camRotation = 0.0f;
-    //float rotationSpeed = 2.0f;
-    //float camRotationSpeed = 1.5f;
-    //public GameObject cam;
+    float rotation = 0.0f;
+    float camRotation = 0.0f;
+    float rotationSpeed = 2.0f;
+    float camRotationSpeed = 1.5f;
+    public GameObject cam;
     Rigidbody myRigidBody;
 
     public bool isOnGround;
@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpForce = 500.0f;
 
-    Animator myAnim;
+    //Animator myAnim;
     internal bool isGrounded;
 
     void Start()
     {
-        myAnim = GetComponentInChildren<Animator>();
+       // myAnim = GetComponentInChildren<Animator>();
 
         Cursor.lockState = CursorLockMode.Locked;
 		
@@ -42,11 +42,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
-        myAnim.SetBool("isOnGround", isOnGround);
+        //myAnim.SetBool("isOnGround", isOnGround);
 
         if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
         {
-            myAnim.SetTrigger("jumped");
+            //myAnim.SetTrigger("jumped");
             myRigidBody.AddForce(transform.up * jumpForce);
         }
 
@@ -68,11 +68,11 @@ public class PlayerController : MonoBehaviour
         Vector3 newVelocity = (transform.forward * Input.GetAxis("Horizontal") * maxSpeed + (transform.right * -Input.GetAxis("Vertical") * maxSpeed));
         myRigidBody.velocity = new Vector3(newVelocity.x, myRigidBody.velocity.y, newVelocity.z);
 
-        //rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
-        //transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
+        rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
+        transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
 
-        //camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
-        //cam.transform.localRotation = Quaternion.Euler(new Vector3(Mathf.Clamp(-camRotation, -16f, 13f), -90f, 0.0f));
+        camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
+        cam.transform.localRotation = Quaternion.Euler(new Vector3(Mathf.Clamp(-camRotation, -30f, 30f), -90f, 0.0f));
 
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
